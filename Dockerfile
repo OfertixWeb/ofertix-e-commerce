@@ -1,19 +1,15 @@
-FROM node:22 AS build
-
+FROM node:20-alpine AS build
 WORKDIR /app
-
 COPY package*.json ./
 RUN npm install
-
 COPY . .
 RUN npm run build
 
 FROM nginx:alpine
-
 COPY --from=build /app/dist /usr/share/nginx/html
-
-# Cambiar puerto a 8080
 EXPOSE 8080
 
-# Config nginx para usar 8080
+# Nginx por defecto usa puerto 80, Cloud Run necesita 8080
+RUN sed -i 's/listen 80;/listen 8080;/' /etc/nginx/conf.d/default.conf
+
 CMD ["nginx", "-g", "daemon off;"]
