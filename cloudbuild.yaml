@@ -16,6 +16,7 @@ steps:
     args: ["push", "gcr.io/$PROJECT_ID/ofertix"]
 
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "gcloud"
     args:
       [
         "run",
