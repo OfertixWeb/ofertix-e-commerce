@@ -8,7 +8,7 @@ const iconSize: number = 20
 const Header: React.FC = () => {
 
   return (
-    <header className="flex justify-between items-center px-10 py-5">
+    <header className="flex justify-between items-center px-10 py-5 sticky top-0 z-50 bg-white">
       <NavLink to="/">
         <img src="/logo.png" alt="logo" className="w-30 " />
       </NavLink>
