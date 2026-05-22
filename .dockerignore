@@ -1,0 +1,8 @@
+node_modules
+.string
+dist
+build
+.git
+.env
+.env.local
+README.md
