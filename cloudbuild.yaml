@@ -2,7 +2,7 @@ steps:
   # Paso 1: Construir la imagen de Docker usando Kaniko
   - name: "gcr.io/kaniko-project/executor:latest"
     args:
-      - --destination=gcr.io/$PROJECT_ID/mi-react-app:$COMMIT_SHA
+      - --destination=gcr.io/$PROJECT_ID/ofertix-e-commerce:$COMMIT_SHA
       - --cache=true
       - --build-arg=VITE_API_URL=$_VITE_API_URL
 
