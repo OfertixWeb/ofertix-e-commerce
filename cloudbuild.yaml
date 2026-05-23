@@ -1,0 +1,22 @@
+steps:
+  # Paso 1: Construir la imagen de Docker usando Kaniko
+  - name: "gcr.io/kaniko-project/executor:latest"
+    args:
+      - --destination=gcr.io/$PROJECT_ID/mi-react-app:$COMMIT_SHA
+      - --cache=true
+      - --build-arg=VITE_API_URL=$_VITE_API_URL
+
+  # Paso 2: Desplegar la imagen recién creada en Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "gcloud"
+    args:
+      - "run"
+      - "deploy"
+      - "mi-react-app-service" # El nombre de tu servicio en Cloud Run
+      - "--image=gcr.io/$PROJECT_ID/mi-react-app:$COMMIT_SHA"
+      - "--region=us-central1" # Cambia esto por tu región
+      - "--platform=managed"
+      - "--allow-unauthenticated"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
