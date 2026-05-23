@@ -12,9 +12,9 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "mi-react-app-service" # El nombre de tu servicio en Cloud Run
-      - "--image=gcr.io/$PROJECT_ID/mi-react-app:$COMMIT_SHA"
-      - "--region=us-central1" # Cambia esto por tu región
+      - "ofertix-e-commerce"
+      - "--image=us-south1.pkg.dev/$PROJECT_ID/ofertix-e-commerce/:$COMMIT_SHA"
+      - "--region=us-south1"
       - "--platform=managed"
       - "--allow-unauthenticated"
 
