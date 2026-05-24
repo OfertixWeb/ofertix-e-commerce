@@ -13,6 +13,12 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, alt, className = "", onError
   const [isVisible, setIsVisible] = useState(false)
   const [loaded, setLoaded] = useState(false)
 
+  const markLoadedIfComplete = (img: HTMLImageElement | null) => {
+    if (img?.complete && img.naturalHeight > 0) {
+      setLoaded(true)
+    }
+  }
+
   useEffect(() => {
     setLoaded(false)
   }, [src])
@@ -22,11 +28,7 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, alt, className = "", onError
     if (!element) return
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        const visible = entry.isIntersecting
-        setIsVisible(visible)
-        if (!visible) setLoaded(false)
-      },
+      ([entry]) => setIsVisible(entry.isIntersecting),
       { rootMargin: "200px" }
     )
 
@@ -41,6 +43,7 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, alt, className = "", onError
       )}
       {isVisible && (
         <img
+          ref={markLoadedIfComplete}
           src={src}
           alt={alt}
           className={`${className} ${loaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
