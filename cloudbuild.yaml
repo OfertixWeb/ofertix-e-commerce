@@ -2,7 +2,7 @@ steps:
   # Paso 1: Construir la imagen de Docker usando Kaniko
   - name: "gcr.io/kaniko-project/executor:latest"
     args:
-      - --destination=us-south1-docker.pkg.dev/$PROJECT_ID/ofertix-e-commerce/ofertix-e-commerce:$COMMIT_SHA
+      - --destination=us-south1-docker.pkg.dev/$PROJECT_ID/ofertix-e-commerce/ofertix-e-commerce:$BUILD_ID
       - --cache=true
       - --build-arg=VITE_SUPABASE_URL=$_VITE_SUPABASE_URL
       - --build-arg=VITE_SUPABASE_PUBLISHABLE_KEY=$_VITE_SUPABASE_PUBLISHABLE_KEY
@@ -14,7 +14,7 @@ steps:
       - "run"
       - "deploy"
       - "ofertix-e-commerce"
-      - "--image=us-south1-docker.pkg.dev/$PROJECT_ID/ofertix-e-commerce/ofertix-e-commerce:$COMMIT_SHA"
+      - "--image=us-south1-docker.pkg.dev/$PROJECT_ID/ofertix-e-commerce/ofertix-e-commerce:$BUILD_ID"
       - "--region=us-south1"
       - "--platform=managed"
       - "--allow-unauthenticated"
