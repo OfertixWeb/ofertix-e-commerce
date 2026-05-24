@@ -4,7 +4,8 @@ steps:
     args:
       - --destination=us-south1-docker.pkg.dev/$PROJECT_ID/ofertix-e-commerce/ofertix-e-commerce:$COMMIT_SHA
       - --cache=true
-      - --build-arg=VITE_API_URL=$_VITE_API_URL
+      - --build-arg=VITE_SUPABASE_URL=$_VITE_SUPABASE_URL
+      - --build-arg=VITE_SUPABASE_PUBLISHABLE_KEY=$_VITE_SUPABASE_PUBLISHABLE_KEY
 
   # Paso 2: Desplegar la imagen recién creada en Cloud Run
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
