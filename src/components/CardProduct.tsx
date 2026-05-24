@@ -1,27 +1,42 @@
 import type React from "react"
+import LazyImage from "./LazyImage"
 
 interface CardProps {
   desc: string
   normalPrice: number
   oldPrice?: number
   imgUrl: string
+  lazy?: boolean
 }
 
 const fmt = (n: number) =>
   new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 }).format(n)
 
-const Card: React.FC<CardProps> = ({ desc, normalPrice, oldPrice, imgUrl }) => {
+const imageClassName = "w-full aspect-square object-cover bg-gray-50"
+
+const Card: React.FC<CardProps> = ({ desc, normalPrice, oldPrice, imgUrl, lazy = false }) => {
   const discount = oldPrice ? Math.round((1 - normalPrice / oldPrice) * 100) : null
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.style.display = "none"
+  }
 
   return (
     <div className="group bg-white border border-gray-100 rounded-2xl overflow-hidden cursor-pointer transition-all duration-150 hover:-translate-y-0.5 hover:border-red-500">
-      <img
-        className="w-full aspect-square object-cover bg-gray-50"
-        src={imgUrl}
-        alt={desc}
-        onError={(e) => (e.currentTarget.style.display = "none")}
-        loading="lazy"
-      />
+      {lazy ? (
+        <LazyImage
+          className={imageClassName}
+          src={imgUrl}
+          alt={desc}
+          onError={handleImageError}
+        />
+      ) : (
+        <img
+          className={imageClassName}
+          src={imgUrl}
+          alt={desc}
+          onError={handleImageError}
+        />
+      )}
       <div className="p-3.5">
         <p className="text-sm font-medium text-gray-900 leading-snug mb-2.5 line-clamp-2">{desc}</p>
 

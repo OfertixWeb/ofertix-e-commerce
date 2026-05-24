@@ -1,3 +1,9 @@
+interface Category {
+  id: number
+  name: string
+  slug: string
+}
+
 interface Product {
   id: number
   code: string
@@ -5,6 +11,8 @@ interface Product {
   normal_price: number
   old_price?: number
   desc: string
+  category_id?: number
+  categorias?: Category
 }
 
-export type { Product }
+export type { Category, Product }
