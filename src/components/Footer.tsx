@@ -4,8 +4,8 @@ import { BsFacebook, BsInstagram, BsTiktok } from "react-icons/bs";
 const Footer: React.FC = () => {
 
   return (
-    <footer className=" bg-mauve-950 gap-5 text-white flex flex-col items-center">
-      <div className="w-full flex flex-row justify-evenly items-start px-10 py-5 ">
+    <footer className=" bg-mauve-950 gap-10 text-white flex flex-col items-center py-10 ">
+      <div className="w-full flex flex-row justify-evenly items-start px-10">
         <section className="flex flex-col gap-2">
           <h1><b>Sobre nosotros</b></h1>
           <ul className="flex flex-col gap-2">

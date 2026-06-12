@@ -7,6 +7,10 @@ const routes = [
     element: <HomeScreen />,
   },
   {
+    path: "/home",
+    element: <HomeScreen />,
+  },
+  {
     path: "/category/:slug",
     element: <CategoryScreen />,
   },

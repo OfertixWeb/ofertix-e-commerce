@@ -2,9 +2,10 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router"
 import PageLayout from "../components/PageLayout"
-import ProductInfiniteScroll from "../components/ProductInfiniteScroll"
+
 import type { Category } from "../utils/app_types"
 import { supabase } from "../supabase_client"
+import ProductInfiniteScroll from "../components/ProductInfinteScroll"
 
 const CategoryScreen: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -73,7 +74,7 @@ const CategoryScreen: React.FC = () => {
             </Link>
           </section>
         ) : (
-          <ProductInfiniteScroll title={category.name} categoryId={category.id} />
+          <ProductInfiniteScroll title={category.name} />
         )}
       </main>
     </PageLayout>
